@@ -35,9 +35,11 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     //JetPack
     implementation "androidx.work:work-runtime-ktx:$work_version"
-
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     // Room components
     implementation "androidx.room:room-runtime:$rootProject.roomVersion"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     implementation "androidx.room:room-ktx:$rootProject.roomVersion"
     androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
