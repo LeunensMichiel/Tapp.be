@@ -1,4 +1,22 @@
 package com.leunesmedia.tappbe.repositories
 
-class BeerRepository {
+import androidx.lifecycle.LiveData
+import com.leunesmedia.tappbe.data.Beer
+import com.leunesmedia.tappbe.data.BeerDao
+
+class BeerRepository private constructor(private val beerDao: BeerDao) {
+    fun getBeers() = beerDao.getBeers()
+    fun getBeerById(beerId: String) = beerDao.getBeerById(beerId)
+
+    companion object {
+        @Volatile
+        private var beerRepositoryInstance: BeerRepository? = null
+
+        fun getBeerRepositoryInstance(beerDao: BeerDao) =
+            beerRepositoryInstance ?: synchronized(this) {
+                beerRepositoryInstance ?: BeerRepository(beerDao).also {
+                    beerRepositoryInstance = it
+                }
+            }
+    }
 }
