@@ -13,7 +13,7 @@ object InjectorUtils {
             TappDatabase.getTappDatabaseInstance(context.applicationContext).beerDao()
         )
     }
-    fun provideBeerListViewModelFactory(fragment: Fragment): BeerListViewModelFactory {
-        return BeerListViewModelFactory(getBeerRepository(fragment.requireContext()), fragment)
+    fun provideBeerListViewModelFactory(context: Context): BeerListViewModelFactory {
+        return BeerListViewModelFactory(getBeerRepository(context.applicationContext))
     }
 }

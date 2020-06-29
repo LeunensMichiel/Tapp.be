@@ -7,6 +7,9 @@ import com.leunesmedia.tappbe.data.BeerDao
 class BeerRepository private constructor(private val beerDao: BeerDao) {
     fun getBeers() = beerDao.getBeers()
     fun getBeerById(beerId: String) = beerDao.getBeerById(beerId)
+    suspend fun insert(beer: Beer) {
+        beerDao.insert(beer)
+    }
 
     companion object {
         @Volatile

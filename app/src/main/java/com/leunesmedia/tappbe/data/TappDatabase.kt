@@ -6,6 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import com.leunesmedia.tappbe.workers.SeedDatabaseWorker
 import java.util.*
 
 @Database(entities = [Beer::class], version = 1, exportSchema = false)
@@ -27,7 +29,14 @@ public abstract class TappDatabase : RoomDatabase() {
                 context.applicationContext,
                 TappDatabase::class.java,
                 "tapp_database"
-            ).build()
+            ).addCallback(object : RoomDatabase.Callback() {
+                override fun onCreate(db: SupportSQLiteDatabase) {
+                    super.onCreate(db)
+                    val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>().build()
+                    WorkManager.getInstance(context).enqueue(request)
+                }
+            })
+            .build()
         }
     }
 }
