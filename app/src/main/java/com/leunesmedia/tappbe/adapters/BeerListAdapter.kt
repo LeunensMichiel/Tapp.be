@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.leunesmedia.tappbe.R
-import com.leunesmedia.tappbe.data.Beer
-import kotlinx.android.synthetic.main.recyclerview_item_beer.view.*
+import com.leunesmedia.tappbe.model.Beer
 
 class BeerListAdapter internal constructor(context: Context) : RecyclerView.Adapter<BeerListAdapter.BeerViewHolder>(){
     private val inflater: LayoutInflater = LayoutInflater.from(context)

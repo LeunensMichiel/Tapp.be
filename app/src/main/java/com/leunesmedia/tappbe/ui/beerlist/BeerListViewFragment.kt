@@ -1,4 +1,4 @@
-package com.leunesmedia.tappbe.views
+package com.leunesmedia.tappbe.ui.beerlist
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,15 +11,13 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leunesmedia.tappbe.R
 import com.leunesmedia.tappbe.adapters.BeerListAdapter
-import com.leunesmedia.tappbe.utils.InjectorUtils
-import com.leunesmedia.tappbe.viewmodels.BeerListViewModel
+import com.leunesmedia.tappbe.model.State
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_beer_list_view.*
 
-
+@AndroidEntryPoint
 class BeerListView : Fragment() {
-    private val beerListViewModel: BeerListViewModel by viewModels {
-        InjectorUtils.provideBeerListViewModelFactory(requireContext())
-    }
+    private val beerListViewModel: BeerListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,8 +35,17 @@ class BeerListView : Fragment() {
         recyclerview_beers.itemAnimator = DefaultItemAnimator()
         beerListViewModel.allBeers.observe(viewLifecycleOwner, Observer { result ->
             result?.let {
-                adapter.setBeers(result)
+                when (result) {
+                    is State.Success -> {
+                        if (result.data.isNotEmpty()) {
+                            adapter.setBeers(result.data.toMutableList())
+                        }
+                    }
+                }
             }
         })
+        if (beerListViewModel.allBeers.value !is State.Success) {
+            beerListViewModel.getBeers()
+        }
     }
 }
