@@ -10,4 +10,14 @@
         android:name="com.leunesmedia.tappbe.ui.beerlist.BeerListView"
         android:label="fragment_beer_list_view"
         tools:layout="@layout/fragment_beer_list_view" />
+    <fragment
+        android:id="@+id/shoppingCartFragment"
+        android:name="com.leunesmedia.tappbe.ui.cart.CartFragment"
+        android:label="cart_fragment"
+        tools:layout="@layout/cart_fragment" />
+    <fragment
+        android:id="@+id/ordersFragment"
+        android:name="com.leunesmedia.tappbe.ui.orders.OrdersFragment"
+        android:label="orders_fragment"
+        tools:layout="@layout/orders_fragment" />
 </navigation>

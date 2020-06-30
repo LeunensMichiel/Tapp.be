@@ -5,4 +5,12 @@
         android:id="@+id/beerListViewFragment"
         android:icon="@drawable/ic_baseline_menu_book_24"
         android:title="Menu" />
+    <item
+        android:id="@+id/shoppingCartFragment"
+        android:icon="@drawable/ic_baseline_shopping_cart_24"
+        android:title="Winkelmandje" />
+    <item
+        android:id="@+id/ordersFragment"
+        android:icon="@drawable/ic_baseline_notes_24"
+        android:title="Bestellingen" />
 </menu>
